@@ -28,7 +28,7 @@ namespace
     class UnhandledOp : public ngraph::op::Op
     {
     public:
-        UnhandledOp(const std::shared_ptr<Node>& arg)
+        UnhandledOp(const Output<Node>& arg)
             : Op({arg})
         {
             constructor_validate_and_infer_types();
@@ -45,8 +45,10 @@ namespace
         }
 
         static constexpr NodeImplInfo node_impl_info{"UnhandledOp", 0};
-        const char* get_type_name() const override { return node_impl_info.type_name; }
+        const NodeImplInfo& get_node_impl_info() const override { return node_impl_info; }
     };
+
+    constexpr NodeImplInfo UnhandledOp::node_impl_info;
 }
 
 NGRAPH_TEST(${BACKEND_NAME}, unhandled_op)

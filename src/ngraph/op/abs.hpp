@@ -30,8 +30,8 @@ namespace ngraph
         {
         public:
             NGRAPH_API
-            static constexpr NodeImplInfo node_impl_info {"Abs", 0};
-            const char* get_type_name() const override { return node_impl_info.type_name; }
+            static constexpr NodeImplInfo node_impl_info{"Abs", 0};
+            const NodeImplInfo& get_node_impl_info() const override { return node_impl_info; }
             /// \brief Constructs an absolute value operation.
             Abs() = default;
 

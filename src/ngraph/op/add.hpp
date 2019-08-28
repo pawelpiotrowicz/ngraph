@@ -31,7 +31,7 @@ namespace ngraph
         public:
             NGRAPH_API
             static constexpr NodeImplInfo node_impl_info{"Add", 0};
-            const char* get_type_name() const override { return node_impl_info.type_name; }
+            const NodeImplInfo& get_node_impl_info() const override { return node_impl_info; }
             /// \brief Constructs an unitialized addition operation
             Add() = default;
 

@@ -56,19 +56,22 @@
 using namespace ngraph;
 using namespace std;
 
-class UnhandledOp : public ngraph::op::Abs
+namespace
 {
-public:
-    UnhandledOp(const std::shared_ptr<Node>& arg)
-        : Abs(arg)
+    class UnhandledOp : public ngraph::op::Abs
     {
-    }
+    public:
+        UnhandledOp(const std::shared_ptr<Node>& arg)
+            : Abs(arg)
+        {
+        }
 
-    static constexpr NodeImplInfo node_impl_info{"UnhandledOp", 0};
-    const char* get_type_name() const override { return node_impl_info.type_name; }
-};
+        static constexpr NodeImplInfo node_impl_info{"UnhandledOp", 0};
+        const NodeImplInfo& get_node_impl_info() const override { return node_impl_info; }
+    };
 
-const char* UnhandledOp::type_name{"UnhandledOp"};
+    constexpr NodeImplInfo UnhandledOp::node_impl_info;
+}
 
 static void compare_backends(const std::shared_ptr<Function>& f1,
                              const std::shared_ptr<Function>& f2,

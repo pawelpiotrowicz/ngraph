@@ -91,6 +91,8 @@ namespace ngraph
     /// or a (possibly empty) tuple of values.
     class Node : public std::enable_shared_from_this<Node>
     {
+        static constexpr NodeImplInfo node_impl_info{nullptr, 0};
+
         // For access to generate_adjoints.
         friend class autodiff::Adjoints;
 
@@ -164,12 +166,19 @@ namespace ngraph
             return has_type<NodeType>() ? shared_from_this() : std::shared_ptr<NodeType>();
         }
 
+        virtual const NodeImplInfo& get_node_impl_info() const { return node_impl_info; }
         virtual const char* get_type_name() const
         {
-            // Transitional definition
-            return description().c_str();
+            auto& info = get_node_impl_info();
+            if (nullptr == info.type_name)
+            {
+                // Transitional definition
+                return description().c_str();
+            }
+            return info.type_name;
         }
-
+        virtual int32_t get_version() { return get_node_impl_info().version; }
+        virtual int32_t get_version() const { return 0; }
         /// Sets/replaces the arguments with new arguments.
         void set_arguments(const NodeVector& arguments);
         /// Sets/replaces the arguments with new arguments.

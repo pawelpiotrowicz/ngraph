@@ -21,6 +21,8 @@
 using namespace std;
 using namespace ngraph;
 
+constexpr NodeImplInfo op::Abs::node_impl_info;
+
 op::Abs::Abs(const Output<Node>& arg)
     : UnaryElementwiseArithmetic(arg)
 {

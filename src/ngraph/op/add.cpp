@@ -19,6 +19,8 @@
 using namespace std;
 using namespace ngraph;
 
+constexpr NodeImplInfo op::Add::node_impl_info;
+
 op::Add::Add(const Output<Node>& arg0, const Output<Node>& arg1, const AutoBroadcastSpec& autob)
     : BinaryElementwiseArithmetic(arg0, arg1, autob)
 {
