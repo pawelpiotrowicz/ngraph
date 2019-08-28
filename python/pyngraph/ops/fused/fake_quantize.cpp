@@ -32,5 +32,5 @@ void regclass_pyngraph_op_FakeQuantize(py::module m)
                               const std::shared_ptr<ngraph::Node>&,
                               const std::shared_ptr<ngraph::Node>&,
                               const std::shared_ptr<ngraph::Node>&,
-                              unsigned int&>());
+                              unsigned long&>());
 }
