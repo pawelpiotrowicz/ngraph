@@ -29,7 +29,7 @@ namespace
     {
     public:
         UnhandledOp(const std::shared_ptr<Node>& arg)
-            : Op("Unsupported_op", check_single_output_args({arg}))
+            : Op({arg})
         {
             constructor_validate_and_infer_types();
         }
@@ -44,11 +44,9 @@ namespace
             set_output_type(0, get_input_element_type(0), get_input_partial_shape(0));
         }
 
-        static const char* type_name;
-        const char* get_type_name() const override { return type_name; }
+        static constexpr NodeImplInfo node_impl_info{"UnhandledOp", 0};
+        const char* get_type_name() const override { return node_impl_info.type_name; }
     };
-
-    const char* UnhandledOp::type_name{"UnhandledOp"};
 }
 
 NGRAPH_TEST(${BACKEND_NAME}, unhandled_op)

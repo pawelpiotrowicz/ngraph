@@ -21,8 +21,6 @@
 using namespace std;
 using namespace ngraph;
 
-const char* op::Abs::type_name{"Abs"};
-
 op::Abs::Abs(const Output<Node>& arg)
     : UnaryElementwiseArithmetic(arg)
 {

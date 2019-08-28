@@ -30,8 +30,8 @@ namespace ngraph
         {
         public:
             NGRAPH_API
-            static const char* type_name;
-            const char* get_type_name() const override { return type_name; }
+            static constexpr NodeImplInfo node_impl_info{"Add", 0};
+            const char* get_type_name() const override { return node_impl_info.type_name; }
             /// \brief Constructs an unitialized addition operation
             Add() = default;
 
